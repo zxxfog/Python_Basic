@@ -22,7 +22,7 @@ int main(void)
 	time(&timeNow);
 	pTime = localtime(&timeNow);
 	sprintf(&timeStr[0],"%04d-%02d-%02d %02d:%02d:%02d",pTime->tm_year + 1900, pTime->tm_mon+1, pTime->tm_mday, pTime->tm_hour, pTime->tm_min, pTime->tm_sec);
-	printf("\t %s  ( <-- 2017-09-20 00:00:00 )\n\n",timeStr);
+	printf("\t %s  ( <-- 2017-09-26 00:00:00 )\n\n",timeStr);
 	printf("-----------------------------------------------------\n\n");
 
 
@@ -53,7 +53,7 @@ static unsigned int calcSec(struct tm *pTm)
 	unsigned char secVal = 0U;
 	unsigned char mon_day[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 	/*- 下面这个数组分别为：9月到9月末、9月到10月末、9月到11月末的天数 */
-	unsigned char day_temp[3] = {11,31+11,30+31+11};
+	unsigned char day_temp[3] = {5,31+11,30+31+11};
 	unsigned char index = 0U;
 
 	if(pTm != NULL)
@@ -70,15 +70,15 @@ static unsigned int calcSec(struct tm *pTm)
 		{
 			if(monVal == 9)
 			{
-				/*- 当前是2017-09-20 */
-				if(dayVal == 20)
+				/*- 当前是2017-09-26 */
+				if(dayVal == 26)
 				{
 					dayTemp = 0U;
 				}
-				/*- 是9月，但不是20号 */
+				/*- 是9月，但不是26号 */
 				else
 				{
-					dayTemp = dayVal - 20;
+					dayTemp = dayVal - 26;
 				}
 			}
 			else
@@ -106,7 +106,7 @@ static unsigned int calcSec(struct tm *pTm)
 				}	
 			}
 		}
-		printf("\tTotal days : %d\n",dayTemp+1);
+		printf("\tTotal days : %d\n",dayTemp);
 		ret = hourVal*60*60+minVal*60+secVal+dayTemp*24*60*60;
 	}
 	else
